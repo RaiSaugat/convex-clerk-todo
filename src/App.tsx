@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <SignedOut>
-        <SignInButton />
+        <div className='w-screen h-screen flex items-center justify-center'>
+          <SignInButton />
+        </div>
       </SignedOut>
       <SignedIn>
         <div className='p-4'>

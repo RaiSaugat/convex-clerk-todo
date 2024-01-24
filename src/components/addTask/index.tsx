@@ -6,30 +6,36 @@ import { Button } from '@/src/components/ui/button';
 import { Input } from '@/src/components/ui/input';
 import { api } from '../../../convex/_generated/api';
 
-function InputWithButton() {
+function AddTask() {
   const [value, setValue] = useState<string>('');
   const { user } = useUser();
 
   const addTask = useMutation(api.tasks.createTask);
 
-  console.log(user?.id);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (value === '') return;
+    addTask({ text: value, userId: `${user?.id}` });
+    setValue('');
+  };
 
   return (
-    <div className='flex w-full max-w-sm items-center space-x-2'>
+    <form
+      className='flex w-full max-w-sm items-center !mb-4'
+      onSubmit={handleSubmit}
+    >
       <Input
         type='text'
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder='Add task'
+        className='mr-4'
       />
-      <Button
-        onClick={() => addTask({ text: value, userId: `${user?.id}` })}
-        type='submit'
-      >
+      <Button type='submit' disabled={value === ''}>
         Add
       </Button>
-    </div>
+    </form>
   );
 }
 
-export default InputWithButton;
+export default AddTask;
