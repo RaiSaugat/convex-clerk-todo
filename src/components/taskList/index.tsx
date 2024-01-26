@@ -11,6 +11,7 @@ import {
 import { Button } from '@/src/components/ui/button';
 import { useUser } from '@clerk/clerk-react';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
+import { DeleteTask } from '..';
 import { api } from '../../../convex/_generated/api';
 
 function TaskList() {
@@ -60,13 +61,16 @@ function TaskList() {
             <div key={_id}>
               <div className='flex justify-between mb-2'>
                 {text}
-                <Button
-                  variant='outline'
-                  size='icon'
-                  onClick={() => isCompleted({ id: _id, isCompleted: true })}
-                >
-                  <PlusIcon className='h-4 w-4' />
-                </Button>
+                <div className='flex space-x-2'>
+                  <Button
+                    variant='outline'
+                    size='icon'
+                    onClick={() => isCompleted({ id: _id, isCompleted: true })}
+                  >
+                    <PlusIcon className='h-4 w-4' />
+                  </Button>
+                  <DeleteTask id={_id} />
+                </div>
               </div>
             </div>
           ))}

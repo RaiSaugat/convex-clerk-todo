@@ -32,3 +32,11 @@ export const completeTask = mutation({
     await ctx.db.patch(id, { isCompleted: args.isCompleted });
   },
 });
+
+export const deleteTask = mutation({
+  args: { id: v.id('tasks') },
+  handler: async (ctx, args) => {
+    const { id } = args;
+    return await ctx.db.delete(id);
+  },
+});

@@ -1,4 +1,5 @@
 import { SignInButton, SignedIn, SignedOut } from '@clerk/clerk-react';
+
 import { Header } from './components';
 import { Home } from './pages';
 
